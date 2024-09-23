@@ -1,0 +1,25 @@
+<!-- src/app/add-product/add-product.component.html -->
+<h3>Add Product</h3>
+<form (ngSubmit)="addProduct()" class="mb-4">
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="newProduct.name" name="name" placeholder="Name" required />
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="newProduct.type" name="type" placeholder="Type" required />
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="newProduct.place" name="place" placeholder="Place" required />
+  </div>
+  <div class="form-group">
+    <input type="number" class="form-control" [(ngModel)]="newProduct.warranty" name="warranty" placeholder="Warranty" required />
+  </div>
+  <button type="submit" class="btn btn-primary">Add Product</button>
+</form>
+
+<!-- Display success or error messages -->
+<div *ngIf="successMessage" class="alert alert-success">
+  {{ successMessage }}
+</div>
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>

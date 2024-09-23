@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <h3>Product List</h3>
+
+  <div class="form-group mb-3">
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Search Products by ID" 
+      [(ngModel)]="searchTerm" 
+      (input)="filterProducts()"
+      (keyup.enter)="searchById()"
+    />
+    <button (click)="searchById()" type="button" class="btn btn-secondary mt-2">Search by ID</button>
+    <button (click)="clearSearch()" type="button" class="btn btn-light mt-2">Clear</button>
+  </div>
+
+  <div class="mb-3">
+    <button (click)="addProduct()" type="button" class="btn btn-primary btn-sm">Add Product</button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let product of filteredProducts">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ product.type }}</h6>
+          <p class="card-text">Place: {{ product.place }}</p>
+          <p class="card-text">Warranty: {{ product.warranty }} years</p>
+          <div class="d-flex justify-content-between">
+            <button (click)="editProduct(product.id!)" type="button" class="btn btn-warning btn-sm">Edit</button>
+            <button (click)="confirmDelete(product.id!)" type="button" class="btn btn-danger btn-sm">Delete</button>
+            <span>ID: {{ product.id }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for displaying product details -->
+  <div *ngIf="selectedProduct" class="modal show" tabindex="-1" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Product Details</h5>
+          <button type="button" class="close" (click)="selectedProduct = null">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><strong>ID:</strong> {{ selectedProduct.id }}</p>
+          <p><strong>Name:</strong> {{ selectedProduct.name }}</p>
+          <p><strong>Type:</strong> {{ selectedProduct.type }}</p>
+          <p><strong>Place:</strong> {{ selectedProduct.place }}</p>
+          <p><strong>Warranty:</strong> {{ selectedProduct.warranty }} years</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="selectedProduct = null">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
